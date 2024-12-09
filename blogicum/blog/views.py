@@ -1,31 +1,27 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import Http404
 from blog.models import Post, Category
-from django.db.models import Q
 from django.utils import timezone
 from .models import Post
 
 
 def index(request):
-    post_list = Post.objects.select_related(
-        'category', 'location', 'author'
-    ).filter(
-        Q(is_published=True) & 
-        Q(pub_date__lte=timezone.now()) & 
-        Q(category__is_published=True)  # Фильтруем по опубликованной категории
-    ).order_by('-pub_date')[:5]
 
-    # Словарь контекста
-    context = {
-        'post_list': post_list,
-    }
+    posts = (
+        Post.objects.filter(
+            is_published=True,
+            pub_date__lte=timezone.now(),
+            category__is_published=True
+        )
+        .order_by('-pub_date')[:5]
+    )
+    # posts.save()
+    context = {'post_list': posts}
 
-    # Рендерим шаблон
-    template_name = 'blog/index.html'
-    return render(request, template_name, context)
+    return render(request, 'blog/index.html', context)
 
 
-def post_detail(request, id):  
+def post_detail(request, id):
     post = get_object_or_404(
         Post.objects.select_related('author', 'category', 'location'),
         id=id,
