@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+{% block title %}Лента записей{% endblock %}
+{% block content %}
+<div class="container py-5">
+  <h1>Лента записей</h1>                        
+  <!-- Перебираем в цикле все посты -->
+{% for post in posts %}
+<hr>
+<article>
+  <ul>
+    <li>{{ post.location }}</li>
+    <li>{{ post.date }}</li>
+    <li>
+      Категория: <a href="{% url 'blog:category_posts' post.category %}">{{post.category}}</a>
+    </li>
+  </ul>
+  <p>{{ post.text|truncatewords:4 }} </p>
+  <a href="{% url 'blog:post_detail' post.id %}">Читать полный текст</a>
+</article>
+{% endfor %} 
+
+  <!-- <article>
+    <ul>
+      <li>
+        Место: Остров отчаянья              
+      </li>
+      <li>
+        Дата: 25 октября 1659 года
+      </li>
+      <li>
+        Категория: <a href="not-my-day">not-my-day</a>
+      </li>
+    </ul>          
+ 
+    <p>
+      Всю ночь и весь день шел дождь и дул сильный ...
+    </p>
+    <a href="detail.html">Читать полный текст</a>
+  </article>
+  <hr>
+  <article>
+    <ul>
+      <li>
+        Место: Остров отчаянья              
+      </li>
+      <li>
+        Дата: 1 октября 1659 года
+      </li>
+      <li>
+        Категория: <a href="not-my-day">not-my-day</a>
+      </li>
+    </ul>
+   
+    <p>
+      Проснувшись поутру, я увидел, что наш корабль сняло с мели ...
+    </p>
+    <a href="detail.html">Читать полный текст</a>
+  </article>
+  <hr>
+  <article>
+    <ul>
+      <li>
+        Место: Остров отчаянья              
+      </li>
+      <li>
+        Дата: 30 сентября 1659 года.
+      </li>
+      <li>
+        Категория: <a href="travel">travel</a>
+      </li>
+    </ul>
+    
+    <p>
+      Наш корабль, застигнутый в открытом море страшным штормом, потерпел крушение. ...
+    </p>
+    <a href="detail.html">Читать полный текст</a>
+  </article>                 
+</div> -->
+{% endblock %}
+
+
