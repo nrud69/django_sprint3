@@ -6,7 +6,7 @@ from django.contrib.auth import get_user_model
 class BaseModel(models.Model):
     is_published = models.BooleanField(default=True,
                                        verbose_name='Опубликовано',
-                                       help_text='Снимите галочку, чтобы'
+                                       help_text='Снимите галочку, чтобы '
                                        'скрыть публикацию.',
                                        blank=False)
     created_at = models.DateTimeField(auto_now_add=True,
@@ -24,8 +24,8 @@ class Post(BaseModel):
     title = models.CharField(max_length=256, verbose_name='Заголовок')
     text = models.TextField(verbose_name='Текст')
     pub_date = models.DateTimeField(verbose_name='Дата и время публикации',
-                                    help_text='Если установить дату и время в'
-                                    'будущем — можно делать отложенные'
+                                    help_text='Если установить дату и время в '
+                                    'будущем — можно делать отложенные '
                                     'публикации.')
     author = models.ForeignKey(
         User,
@@ -58,8 +58,8 @@ class Category(BaseModel):
     title = models.CharField(max_length=256, verbose_name='Заголовок')
     description = models.TextField(verbose_name='Описание')
     slug = models.SlugField(unique=True, verbose_name='Идентификатор',
-                            help_text='Идентификатор страницы для URL;'
-                            'разрешены символы латиницы, цифры, дефис'
+                            help_text='Идентификатор страницы для URL; '
+                            'разрешены символы латиницы, цифры, дефис '
                             'и подчёркивание.')
 
     class Meta:
